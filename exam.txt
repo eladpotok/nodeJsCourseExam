@@ -1,0 +1,32 @@
+const topNStudentsAttendees = (students, attendees, N) => { 
+  const _mapper = {} 
+ 
+  for (const stu of students) { 
+    _mapper[stu] = 0 
+  } 
+ 
+  for (let lectureIndex = 0; lectureIndex < attendees.length; lectureIndex++) { 
+    const currentSet = new Set() 
+ 
+    for (let studentIndex = 0; studentIndex < attendees[lectureIndex].length; studentIndex++) { 
+      const stu = attendees[lectureIndex][studentIndex] 
+ 
+      if (_mapper.hasOwnProperty(stu)) { 
+        if (!currentSet.has(stu)) { 
+          currentSet.add(stu) 
+ 
+          _mapper[stu]++ 
+        } 
+      } 
+    } 
+  } 
+ 
+  const myList = Object.entries(_mapper) 
+ 
+  myList.sort((pair1, pair2) => pair1[1] - pair2[1]) 
+ 
+  for (let i = myList.length - N; i < myList.length ; i++) 
+  { 
+    console.log(myList[i][0]); 
+  } 
+}
